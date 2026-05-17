@@ -19,41 +19,4 @@
   </image:image>
 </url>
 
-<!-- Gallery Section - Trending Wallpapers -->
-<url>
-  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/#gallery</loc>
-  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<!-- Category Pages - Popular wallpaper categories -->
-<url>
-  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=nature</loc>
-  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=space</loc>
-  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=city</loc>
-  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=islamic</loc>
-  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-
 </urlset>
