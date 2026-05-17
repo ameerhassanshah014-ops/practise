@@ -290,6 +290,7 @@ const data = [
   { src: './Wallpapers gallery/ZA-wp6.jpg', title: 'Beautifull Wallpaper 79', description: 'Beautiful high-quality wallpaper' },
 ];
 
+// DOM Elements
 const gallery = document.getElementById('gallery');
 const countLabel = document.getElementById('countLabel');
 const searchInput = document.getElementById('searchInput');
@@ -299,8 +300,165 @@ const lightboxCaption = document.getElementById('lightboxCaption');
 const downloadLink = document.getElementById('downloadLink');
 const closeLightbox = document.getElementById('closeLightbox');
 const ownerLogo = document.getElementById('ownerLogo');
-let lastFocusedElement = null;
 
+// Rating & Comment Elements
+const starRating = document.getElementById('starRating');
+const starButtons = document.querySelectorAll('.star');
+const ratingCount = document.getElementById('ratingCount');
+const averageRating = document.getElementById('averageRating');
+const removeRatingBtn = document.getElementById('removeRatingBtn');
+const commentText = document.getElementById('commentText');
+const charCount = document.getElementById('charCount');
+const submitComment = document.getElementById('submitComment');
+const commentsList = document.getElementById('commentsList');
+
+let lastFocusedElement = null;
+let currentWallpaper = null;
+
+// Storage Helper Functions
+function getWallpaperFeedback(wallpaperSrc) {
+  const feedback = localStorage.getItem(`feedback_${wallpaperSrc}`);
+  return feedback ? JSON.parse(feedback) : { ratings: [], comments: [], userRating: null };
+}
+
+function saveWallpaperFeedback(wallpaperSrc, feedback) {
+  localStorage.setItem(`feedback_${wallpaperSrc}`, JSON.stringify(feedback));
+}
+
+// Rating Functions
+function updateRatingDisplay() {
+  if (!currentWallpaper) return;
+  const feedback = getWallpaperFeedback(currentWallpaper.src);
+  const ratings = feedback.ratings || [];
+  
+  if (ratings.length === 0) {
+    ratingCount.textContent = '0 ratings';
+    averageRating.textContent = 'Average: 0.0★';
+  } else {
+    const avg = (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1);
+    ratingCount.textContent = `${ratings.length} rating${ratings.length !== 1 ? 's' : ''}`;
+    averageRating.textContent = `Average: ${avg}★`;
+  }
+  
+  // Update star display
+  starButtons.forEach((btn) => {
+    btn.classList.remove('active');
+  });
+  
+  if (feedback.userRating) {
+    starButtons.forEach((btn) => {
+      if (parseInt(btn.dataset.value) <= feedback.userRating) {
+        btn.classList.add('active');
+      }
+    });
+    removeRatingBtn.classList.remove('hidden');
+  } else {
+    removeRatingBtn.classList.add('hidden');
+  }
+}
+
+starButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    if (!currentWallpaper) return;
+    const rating = parseInt(btn.dataset.value);
+    const feedback = getWallpaperFeedback(currentWallpaper.src);
+    
+    // Remove old rating if exists
+    if (feedback.userRating) {
+      const idx = feedback.ratings.indexOf(feedback.userRating);
+      if (idx > -1) {
+        feedback.ratings.splice(idx, 1);
+      }
+    }
+    
+    // Add new rating
+    feedback.ratings.push(rating);
+    feedback.userRating = rating;
+    
+    saveWallpaperFeedback(currentWallpaper.src, feedback);
+    updateRatingDisplay();
+  });
+});
+
+removeRatingBtn.addEventListener('click', () => {
+  if (!currentWallpaper) return;
+  const feedback = getWallpaperFeedback(currentWallpaper.src);
+  
+  if (feedback.userRating) {
+    const idx = feedback.ratings.indexOf(feedback.userRating);
+    if (idx > -1) {
+      feedback.ratings.splice(idx, 1);
+    }
+    feedback.userRating = null;
+  }
+  
+  saveWallpaperFeedback(currentWallpaper.src, feedback);
+  updateRatingDisplay();
+});
+
+// Comment Functions
+commentText.addEventListener('input', () => {
+  charCount.textContent = `${commentText.value.length}/500`;
+});
+
+submitComment.addEventListener('click', () => {
+  if (!currentWallpaper || !commentText.value.trim()) return;
+  
+  const feedback = getWallpaperFeedback(currentWallpaper.src);
+  const comment = {
+    id: Date.now(),
+    text: commentText.value.trim(),
+    timestamp: new Date().toLocaleString(),
+  };
+  
+  feedback.comments = feedback.comments || [];
+  feedback.comments.push(comment);
+  
+  saveWallpaperFeedback(currentWallpaper.src, feedback);
+  commentText.value = '';
+  charCount.textContent = '0/500';
+  renderComments();
+});
+
+function renderComments() {
+  if (!currentWallpaper) return;
+  const feedback = getWallpaperFeedback(currentWallpaper.src);
+  const comments = feedback.comments || [];
+  
+  commentsList.innerHTML = '';
+  
+  if (comments.length === 0) {
+    commentsList.innerHTML = '<div class="empty-comments">No comments yet. Be the first to comment!</div>';
+    return;
+  }
+  
+  comments.forEach((comment) => {
+    const commentEl = document.createElement('div');
+    commentEl.className = 'comment-item';
+    commentEl.innerHTML = `
+      <div class="comment-header">
+        <span class="comment-author">Anonymous</span>
+        <span class="comment-time">${comment.timestamp}</span>
+      </div>
+      <div class="comment-text">${comment.text}</div>
+      <div class="comment-actions">
+        <button class="delete-btn" data-comment-id="${comment.id}">Delete</button>
+      </div>
+    `;
+    
+    const deleteBtn = commentEl.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', () => {
+      const feedback = getWallpaperFeedback(currentWallpaper.src);
+      feedback.comments = feedback.comments.filter((c) => c.id !== comment.id);
+      saveWallpaperFeedback(currentWallpaper.src, feedback);
+      renderComments();
+    });
+    
+    commentsList.appendChild(commentEl);
+  });
+}
+
+// Gallery Functions
 function createCard(item) {
   const card = document.createElement('button');
   card.type = 'button';
@@ -323,14 +481,21 @@ function createCard(item) {
 
 function openLightbox(item) {
   lastFocusedElement = document.activeElement;
+  currentWallpaper = item;
+  
   lightboxImage.src = item.src;
   lightboxImage.alt = `${item.title} wallpaper in full preview`;
   lightboxCaption.textContent = item.title;
   downloadLink.href = item.src;
   downloadLink.setAttribute('aria-label', `Download ${item.title} wallpaper`);
+  
   lightbox.classList.remove('hidden');
   lightbox.setAttribute('aria-hidden', 'false');
   lightbox.inert = false;
+  
+  updateRatingDisplay();
+  renderComments();
+  
   closeLightbox.focus();
 }
 
@@ -341,6 +506,7 @@ function close() {
   lightbox.classList.add('hidden');
   lightbox.setAttribute('aria-hidden', 'true');
   lightbox.inert = true;
+  currentWallpaper = null;
 }
 
 function renderGallery(items) {
@@ -363,6 +529,7 @@ function filterGallery(query) {
   renderGallery(filtered);
 }
 
+// Event Listeners
 searchInput.addEventListener('input', (event) => {
   filterGallery(event.target.value);
 });
@@ -391,4 +558,3 @@ if (ownerLogo) {
 }
 
 renderGallery(data);
-
