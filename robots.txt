@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://ameerhassanshah014-ops.github.io/WallVerse/sitemap.xml
