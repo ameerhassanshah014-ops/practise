@@ -5,17 +5,17 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Explore a stunning collection of wallpapers in our gallery. Browse, preview, and download high-quality backgrounds for desktops and mobile devices." />
-  <meta name="keywords" content="wallpapers, HD backgrounds, desktop backgrounds, mobile wallpapers, free wallpapers, wallpaper gallery" />
+  <meta name="description" content="Explore a stunning collection of wallpapers in our gallery. Browse, preview, and download high-quality backgrounds for desktops and mobile devices. Rate and comment on your favorite wallpapers!" />
+  <meta name="keywords" content="wallpapers, HD backgrounds, desktop backgrounds, mobile wallpapers, free wallpapers, wallpaper gallery, ratings, comments" />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="WallVerse: Explore Stunning Backgrounds" />
-  <meta property="og:description" content="Discover curated HD wallpapers, preview beautiful backgrounds, and download eye-catching images for any device." />
+  <meta property="og:description" content="Discover curated HD wallpapers, preview beautiful backgrounds, and download eye-catching images for any device. Rate and comment on wallpapers!" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="./Wallpapers gallery/Universe.jpg" />
   <meta property="og:image:alt" content="Featured Universe wallpaper preview" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="WallVerse: Explore Stunning Backgrounds" />
-  <meta name="twitter:description" content="Browse curated HD wallpapers and download beautiful images for your desktop and mobile devices." />
+  <meta name="twitter:description" content="Browse curated HD wallpapers and download beautiful images for your desktop and mobile devices. Rate and comment on wallpapers!" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="./Wallpapers gallery/Universe.jpg" />
@@ -24,7 +24,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "WallVerse",
-    "description": "Discover and download HD wallpapers for desktops and mobile devices.",
+    "description": "Discover and download HD wallpapers for desktops and mobile devices. Rate and comment on your favorites.",
     "inLanguage": "en"
   }
   </script>
@@ -48,7 +48,7 @@
       <div class="hero-copy">
         <p class="eyebrow">Wallpaper Showcase</p>
         <h1>Discover eye-catching wallpapers for every mood.</h1>
-        <p>Browse curated HD backgrounds and preview them with a smooth gallery experience.</p>
+        <p>Browse curated HD backgrounds, preview them, rate your favorites, and leave comments!</p>
         <div class="search-bar">
           <span class="search-icon">🔎</span>
           <input id="searchInput" type="search" aria-label="Search wallpapers" aria-describedby="searchHelp" placeholder="Search by style, theme, color..." />
@@ -75,7 +75,7 @@
 
     <noscript>
       <div class="noscript-message">
-        JavaScript is required to load the full wallpaper gallery. Please enable JavaScript in your browser to browse, preview, and download wallpapers.
+        JavaScript is required to load the full wallpaper gallery. Please enable JavaScript in your browser to browse, preview, download wallpapers, and leave ratings and comments.
       </div>
     </noscript>
 
@@ -83,7 +83,7 @@
       <div class="section-header">
         <div>
           <h2 id="galleryHeading">Trending Wallpapers</h2>
-          <p>Tap a wallpaper to preview it in full size, then download or save your favorites.</p>
+          <p>Tap a wallpaper to preview it in full size, then download, rate, or comment!</p>
         </div>
         <div class="stats">
           <span><strong id="countLabel">0</strong> wallpapers</span>
@@ -95,17 +95,59 @@
     </section>
 
     <footer class="site-footer">
-      <p> Enjoy a modern wallpaper browsing experience.</p>
+      <p>Enjoy a modern wallpaper browsing experience with ratings and comments.</p>
     </footer>
   </main>
 
+  <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox hidden" aria-hidden="true" inert>
     <button id="closeLightbox" class="lightbox-close" aria-label="Close preview">×</button>
     <div class="lightbox-content">
       <img id="lightboxImage" src="" alt="" />
       <div class="lightbox-info">
-        <p id="lightboxCaption"></p>
-        <a id="downloadLink" class="button" href="#" download>Download</a>
+        <div>
+          <p id="lightboxCaption"></p>
+          <a id="downloadLink" class="button" href="#" download>Download</a>
+        </div>
+      </div>
+
+      <!-- Ratings and Comments Section -->
+      <div class="feedback-section">
+        <!-- Rating System -->
+        <div class="rating-container">
+          <h3>Rate this wallpaper</h3>
+          <div class="star-rating" id="starRating" aria-label="Rate wallpaper from 1 to 5 stars">
+            <button class="star" data-value="1" aria-label="Rate 1 star">★</button>
+            <button class="star" data-value="2" aria-label="Rate 2 stars">★</button>
+            <button class="star" data-value="3" aria-label="Rate 3 stars">★</button>
+            <button class="star" data-value="4" aria-label="Rate 4 stars">★</button>
+            <button class="star" data-value="5" aria-label="Rate 5 stars">★</button>
+          </div>
+          <div id="ratingStats" class="rating-stats">
+            <span id="ratingCount">0 ratings</span>
+            <span id="averageRating">Average: 0.0★</span>
+          </div>
+          <button id="removeRatingBtn" class="button-secondary hidden" aria-label="Remove your rating">Remove My Rating</button>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-container">
+          <h3>Comments</h3>
+          
+          <!-- Comment Form -->
+          <div class="comment-form">
+            <textarea id="commentText" placeholder="Share your thoughts about this wallpaper..." maxlength="500" aria-label="Write a comment"></textarea>
+            <div class="comment-form-actions">
+              <span id="charCount" class="char-count">0/500</span>
+              <button id="submitComment" class="button" aria-label="Submit your comment">Post Comment</button>
+            </div>
+          </div>
+
+          <!-- Comments List -->
+          <div id="commentsList" class="comments-list" aria-label="User comments">
+            <!-- Comments will be dynamically inserted here -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
