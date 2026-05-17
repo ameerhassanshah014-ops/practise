@@ -7,9 +7,50 @@
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <!-- Wallpapers with images -->
+  <url>
+    <loc>https://ameerhassanshah014-ops.github.io/WallVerse/</loc>
+    <lastmod>2026-05-17</lastmod>
     <image:image>
       <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/Universe.jpg</image:loc>
-      <image:title>Featured Universe wallpaper</image:title>
+      <image:title>Galaxy Horizon - Mystic universe wallpaper with glowing stars</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/3D_90.webp.jpg</image:loc>
+      <image:title>Digital Glow - Modern abstract wallpaper with neon geometry</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/3e0290d0ec271b07b73545756c8cbf70.jpg</image:loc>
+      <image:title>Aurora Dream - A dreamlike aurora painting the horizon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/Eternity.jpeg</image:loc>
+      <image:title>Eternity Mist - Soft light and mist create a peaceful mood</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/Fireworks_over_the_Sydney_Opera_House_and_Harbor_Bridge.jpg</image:loc>
+      <image:title>City Celebration - Night fireworks over a shimmering harbor skyline</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/GreenMountainsNatureMobileWallpaper%28Wall2mob.com%29_40292-cprw.jpg</image:loc>
+      <image:title>Emerald Peaks - Calm mountain range with lush green valleys</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/IMG-20230715-WA0000.jpg</image:loc>
+      <image:title>Silent Dawn - A soft sunrise over a peaceful moment</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/IMG-20250826-WA0003.jpg</image:loc>
+      <image:title>Evening Glow - Warm tones and gentle shadows create rich contrast</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/Space_62.webp.jpg</image:loc>
+      <image:title>Space Nebula - A dramatic nebula with vibrant cosmic detail</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/Space_8.webp.jpg</image:loc>
+      <image:title>Cosmic Flow - A cosmic wave drifting through deep space</image:title>
     </image:image>
   </url>
 </urlset>
