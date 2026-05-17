@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<!-- WallVerse - HD Wallpaper Gallery Sitemap -->
 
-
+<!-- Homepage - Main entry point -->
 <url>
   <loc>https://ameerhassanshah014-ops.github.io/WallVerse/</loc>
   <lastmod>2026-05-17T07:50:39+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
+  <image:image>
+    <image:loc>https://ameerhassanshah014-ops.github.io/WallVerse/Wallpapers%20gallery/Universe.jpg</image:loc>
+    <image:title>Featured Universe Wallpaper</image:title>
+  </image:image>
 </url>
 
+<!-- Gallery Section - Trending Wallpapers -->
+<url>
+  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/#gallery</loc>
+  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<!-- Category Pages - Popular wallpaper categories -->
+<url>
+  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=nature</loc>
+  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=space</loc>
+  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=city</loc>
+  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://ameerhassanshah014-ops.github.io/WallVerse/?category=islamic</loc>
+  <lastmod>2026-05-17T07:50:39+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
 
 </urlset>
