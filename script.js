@@ -1,3 +1,7 @@
+// =============== CONFIGURATION ===============
+// Set to true to allow interactions with owner logo, false to disable
+const ALLOW_OWNER_LOGO_INTERACTIONS = false;
+
 const data = [
   { src: './Wallpapers gallery/00043.jpg', title: 'Wallpaper 1', description: 'Beautiful high-quality wallpaper' },
   { src: './Wallpapers gallery/023a7d52-a98c-4c33-b20d-454397b0f26f.jpeg', title: 'Wallpaper 2', description: 'Beautiful high-quality wallpaper' },
@@ -312,6 +316,11 @@ const charCount = document.getElementById('charCount');
 const submitComment = document.getElementById('submitComment');
 const commentsList = document.getElementById('commentsList');
 
+// Feedback sections for conditional hiding
+const ratingContainer = document.getElementById('ratingContainer');
+const commentsContainer = document.getElementById('commentsContainer');
+const downloadLinkElement = downloadLink;
+
 let lastFocusedElement = null;
 let currentWallpaper = null;
 
@@ -323,6 +332,31 @@ function getWallpaperFeedback(wallpaperSrc) {
 
 function saveWallpaperFeedback(wallpaperSrc, feedback) {
   localStorage.setItem(`feedback_${wallpaperSrc}`, JSON.stringify(feedback));
+}
+
+// Check if current wallpaper is owner logo
+function isOwnerLogo(src) {
+  return src.includes('Ameer Hassan Shah.jpeg') || src.includes('Owner photo');
+}
+
+// Update feedback visibility based on wallpaper type
+function updateFeedbackVisibility() {
+  if (!currentWallpaper) return;
+  
+  const isOwner = isOwnerLogo(currentWallpaper.src);
+  const shouldShowFeedback = ALLOW_OWNER_LOGO_INTERACTIONS || !isOwner;
+  
+  // Hide/show rating and comment sections
+  if (ratingContainer) ratingContainer.style.display = shouldShowFeedback ? 'block' : 'none';
+  if (commentsContainer) commentsContainer.style.display = shouldShowFeedback ? 'block' : 'none';
+  
+  // Hide/show download button
+  if (downloadLinkElement) downloadLinkElement.style.display = shouldShowFeedback ? 'inline-block' : 'none';
+  
+  // Show notification if owner logo feedback is disabled
+  if (isOwner && !ALLOW_OWNER_LOGO_INTERACTIONS) {
+    console.log('Owner logo interactions are disabled');
+  }
 }
 
 // Rating Functions
@@ -493,6 +527,7 @@ function openLightbox(item) {
   lightbox.setAttribute('aria-hidden', 'false');
   lightbox.inert = false;
   
+  updateFeedbackVisibility();
   updateRatingDisplay();
   renderComments();
   
@@ -549,11 +584,13 @@ window.addEventListener('keydown', (event) => {
 
 if (ownerLogo) {
   ownerLogo.addEventListener('click', () => {
-    openLightbox({
-      src: './Wallpapers gallery/Ameer Hassan Shah.jpeg',
-      title: 'Ameer Hassan Shah',
-      description: 'Owner photo',
-    });
+    if (ALLOW_OWNER_LOGO_INTERACTIONS) {
+      openLightbox({
+        src: './Wallpapers gallery/Ameer Hassan Shah.jpeg',
+        title: 'Ameer Hassan Shah',
+        description: 'Owner photo',
+      });
+    }
   });
 }
 
